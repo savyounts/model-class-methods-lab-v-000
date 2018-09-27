@@ -7,9 +7,7 @@ class Classification < ActiveRecord::Base
   end
 
   def self.longest
-    boats = Boat.arel_table
-    joins(classification: :boats).project(boats:[:length].maximum)
-
+    Boat.longest
   end
 
 end
