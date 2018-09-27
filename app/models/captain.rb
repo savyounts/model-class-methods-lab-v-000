@@ -10,13 +10,7 @@ class Captain < ActiveRecord::Base
   end
 
   def self.talented_seafarers
-    mb = self.includes(boats: :classifications).where(classifications:{name: "Motorboat"}).uniq &
-    sailors =self.sailors
-    sailors.select do |sailor|
-      mbid = mb.collect {|m| m.id}
-      if mbid.include?(sailor.id)
-      end
-    end
+    self.includes(boats: :classifications).where(classifications:{name: "Motorboat"}).uniq & self.sailors
   end
 
   def self.non_sailors
