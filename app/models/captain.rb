@@ -14,10 +14,10 @@ class Captain < ActiveRecord::Base
   end
 
   def self.talented_seafarers
-    where("id in (?)", self.sailors.pluck(:id) & self.motorboat.pluck(:id)) 
+    where("id in (?)", self.sailors.pluck(:id) & self.motorboat.pluck(:id))
   end
 
   def self.non_sailors
-    includes(boats: :classifications).where.not(classifications:{name: "Sailboat"}).uniq
+    where.not("id in (?)", self.sailors.pluck(:id)) 
   end
 end
